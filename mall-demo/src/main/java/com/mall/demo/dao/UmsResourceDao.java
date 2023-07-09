@@ -26,7 +26,7 @@ public interface UmsResourceDao {
     UmsResourceExt selectResourceWithCategory2(Long id);
 
     /**
-     * 根据分类ID查询资源
+     * 根据分类ID查询资源，用来做分页查询
      */
     List<UmsResource> selectListByCategoryId(Long categoryId);
 
