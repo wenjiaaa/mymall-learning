@@ -27,4 +27,6 @@ public interface UmsAdminMapper {
     int updateByPrimaryKeySelective(UmsAdmin row);
 
     int updateByPrimaryKey(UmsAdmin row);
+
+    List<UmsAdmin> subList(@Param("roleId") Long roleId);
 }
