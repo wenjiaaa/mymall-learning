@@ -32,7 +32,7 @@
         where ur.id = #{id}
     </select>
 
-    <select id="selectResourceWithCategory2" resultType="com.mall.demo.domain.UmsResourceExt">
+    <select id="selectResourceWithCategory2" resultMap="ResourceWithCategoryMap">
         select ur.id,
             ur.create_time,
             ur.name,

@@ -3,6 +3,8 @@ package com.mall.demo.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.mall.demo.dao.UmsAdminDao;
+import com.mall.demo.domain.AdminRoleDto;
+import com.mall.demo.domain.RoleStatDto;
 import com.mall.demo.mbg.mapper.UmsAdminMapper;
 import com.mall.demo.mbg.model.UmsAdmin;
 import com.mall.demo.mbg.model.UmsAdminExample;
@@ -87,5 +89,47 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         return adminMapper.subList(roleId);
     }
 
+    /**
+     * 按角色ID查询后台用户
+     * @return
+     */
+    @Override
+    public List<RoleStatDto> groupList(){
+        return adminMapper.groupList();
+    }
 
+    /**
+     * 按用户名删除后台用户
+     * @param username
+     */
+    @Override
+    public void deleteByUsername(String username){
+        UmsAdminExample example = new UmsAdminExample();
+        example.createCriteria().andUsernameEqualTo(username);
+        adminMapper.deleteByExample(example);
+    }
+
+    /**
+     * 按指定ID修改后台用户的状态
+     * 特别注意这里要使用 updateByExampleSelective， 而不是 updateByExample
+     */
+    @Override
+    public void updateByIds(List<Long> ids, Integer status){
+        UmsAdmin record = new UmsAdmin();
+        record.setStatus(status);
+        UmsAdminExample example = new UmsAdminExample();
+        example.createCriteria().andIdIn(ids);
+        adminMapper.updateByExampleSelective(record,example);
+
+    }
+
+    /**
+     * 一对多查询：按ID查询后台用户信息（包含对应角色列表）
+     * @param id
+     * @return
+     */
+    @Override
+    public AdminRoleDto selectWithRoleList(Long id){
+        return  adminMapper.selectWithRoleList(id);
+    }
 }

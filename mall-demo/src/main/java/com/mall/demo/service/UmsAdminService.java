@@ -2,6 +2,8 @@ package com.mall.demo.service;
 
 import cn.hutool.db.Page;
 import com.github.pagehelper.PageHelper;
+import com.mall.demo.domain.AdminRoleDto;
+import com.mall.demo.domain.RoleStatDto;
 import com.mall.demo.mbg.model.UmsAdmin;
 import com.mall.demo.mbg.model.UmsAdminExample;
 
@@ -26,5 +28,13 @@ public interface UmsAdminService {
     List<UmsAdmin> list(Integer pageNum, Integer pageSize, String username, List<Integer> statusList);
 
     List<UmsAdmin> subList(Long roleId);
+
+    List<RoleStatDto> groupList();
+
+    void deleteByUsername(String username);
+
+    void updateByIds(List<Long> ids, Integer status);
+
+    AdminRoleDto selectWithRoleList(Long id);
 
 }
